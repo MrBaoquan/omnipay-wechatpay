@@ -6,6 +6,9 @@ use Omnipay\Common\AbstractGateway;
 
 abstract class BaseAbstractGateway extends AbstractGateway
 {
+    public $endpoints=[
+        'production'=>'https://parful.com'
+    ];
     public function setTradeType($tradeType)
     {
         $this->setParameter('trade_type', $tradeType);
