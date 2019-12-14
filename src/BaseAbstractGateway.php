@@ -7,8 +7,44 @@ use Omnipay\Common\AbstractGateway;
 abstract class BaseAbstractGateway extends AbstractGateway
 {
     public $endpoints=[
-        'production'=>'https://parful.com'
+        'production'=>'https://api.mch.weixin.qq.com/',
+        'sandbox'=>'https://api.mch.weixin.qq.com/sandboxnew/'
     ];
+
+
+    public function getEndpoint()
+    {
+        return $this->getParameter('endpoint');
+    }
+
+    public function setEndpoint($value)
+    {
+        $this->setParameter('endpoint',$value);
+    }
+
+
+    public function sandbox()
+    {
+        return $this->setEnvironment('sandbox');
+    }
+
+    public function production()
+    {
+        return $this->setEnvironment('production');
+    }
+
+    public function setEnvironment($value)
+    {
+        $env = strtolower($value);
+
+        if (! isset($this->endpoints[$env])) {
+            throw new InvalidRequestException('The environment is invalid');
+        }
+
+        $this->setEndpoint($this->endpoints[$env]);
+        return $this;
+    }
+
     public function setTradeType($tradeType)
     {
         $this->setParameter('trade_type', $tradeType);

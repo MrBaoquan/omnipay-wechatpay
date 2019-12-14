@@ -14,8 +14,17 @@ use Omnipay\WechatPay\Helper;
  */
 class CreateOrderRequest extends BaseAbstractRequest
 {
-    protected $endpoint = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
+    protected $endpoint = 'https://api.mch.weixin.qq.com/';
+    protected $uri = 'pay/unifiedorder';
 
+    public function setEndpoint($endpoint)
+    {
+        $this->endpoint = $endpoint;
+    }
+
+    public function getEndpoint(){
+        return $this->endpoint.$this->uri;
+    }
 
     /**
      * Get the raw data array for this message. The format of this varies from gateway to
@@ -352,7 +361,7 @@ class CreateOrderRequest extends BaseAbstractRequest
     public function sendData($data)
     {
         $body     = Helper::array2xml($data);
-        $response = $this->httpClient->request('POST', $this->endpoint, [], $body)->getBody();
+        $response = $this->httpClient->request('POST', $this->getEndpoint(), [], $body)->getBody();
         $payload  = Helper::xml2array($response);
 
         return $this->response = new CreateOrderResponse($this, $payload);
