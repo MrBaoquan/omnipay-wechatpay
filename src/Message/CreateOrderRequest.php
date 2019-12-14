@@ -14,17 +14,7 @@ use Omnipay\WechatPay\Helper;
  */
 class CreateOrderRequest extends BaseAbstractRequest
 {
-    protected $endpoint = 'https://api.mch.weixin.qq.com/';
     protected $uri = 'pay/unifiedorder';
-
-    public function setEndpoint($endpoint)
-    {
-        $this->endpoint = $endpoint;
-    }
-
-    public function getEndpoint(){
-        return $this->endpoint.$this->uri;
-    }
 
     /**
      * Get the raw data array for this message. The format of this varies from gateway to

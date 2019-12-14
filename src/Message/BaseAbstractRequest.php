@@ -10,6 +10,23 @@ use Omnipay\Common\Message\AbstractRequest;
  */
 abstract class BaseAbstractRequest extends AbstractRequest
 {
+    /**
+     * Production endpoint
+     */
+    protected $endpoint = 'https://api.mch.weixin.qq.com/';
+    /**
+     * wechatpay Uri
+     */
+    protected $uri='';
+    
+    public function setEndpoint($endpoint)
+    {
+        $this->endpoint = $endpoint;
+    }
+
+    public function getEndpoint(){
+        return $this->endpoint.$this->uri;
+    }
 
     /**
      * @return mixed

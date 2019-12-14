@@ -15,8 +15,7 @@ use Omnipay\WechatPay\Helper;
  */
 class DownloadBillRequest extends BaseAbstractRequest
 {
-    protected $endpoint = 'https://api.mch.weixin.qq.com/pay/downloadbill';
-
+    protected $uri = 'pay/downloadbill';
 
     /**
      * Get the raw data array for this message. The format of this varies from gateway to
@@ -110,7 +109,7 @@ class DownloadBillRequest extends BaseAbstractRequest
      */
     public function sendData($data)
     {
-        $responseData = $this->post($this->endpoint, $data, 120);
+        $responseData = $this->post($this->getEndpoint(), $data, 120);
 
         return $this->response = new DownloadBillResponse($this, $responseData);
     }
