@@ -16,8 +16,9 @@ use Omnipay\WechatPay\Helper;
  */
 class RefundOrderRequest extends BaseAbstractRequest
 {
-    protected $endpoint = 'https://api.mch.weixin.qq.com/secapi/pay/refund';
+    protected $endpoint = 'https://api.mch.weixin.qq.com';
 
+    protected $uri = 'secapi/pay/refund';
 
     /**
      * Get the raw data array for this message. The format of this varies from gateway to
@@ -268,7 +269,7 @@ class RefundOrderRequest extends BaseAbstractRequest
             'ssl_key' => $this->getKeyPath(),
         ];
 
-        $result = $client->request('POST', $this->endpoint, $options)->getBody()->getContents();
+        $result = $client->request('POST', $this->getEndpoint(), $options)->getBody()->getContents();
 
         $responseData = Helper::xml2array($result);
 
